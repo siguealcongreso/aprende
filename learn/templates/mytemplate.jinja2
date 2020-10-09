@@ -5,6 +5,7 @@
   <h1><span class="font-normal small">{{ info.title }}</span> <span class="smaller">{{ info.description }}</span></h1>
   <form action='/aprende' method='POST'>
     <input type="hidden" name="index" value="{{ counter }}">
+    <input type="hidden" name="n" value="{{ n }}">
     <p class="lead">{{ number }}. {{ question.text }}</p>
     {% for option in question.options %}
     <p><label><input type="{{ input_type }}" value="{{ option.index }}" name="{{ counter }}" {% if option.index in indexes %}checked{% endif %} />{{ option.text }}</label>

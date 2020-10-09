@@ -24,6 +24,7 @@ def my_view(request):
     global t, info
     passed = False
     session = request.session
+    quiz_file = request.GET['n']
     if 'counter' in session:
         pass
     else:
@@ -41,7 +42,7 @@ def my_view(request):
             'number': session['counter']+1,
             'input_type': input_type,
             'info': info,
-            'passed': passed,
+            'passed': passed, 'n': quiz_file,
             'question': question}
 
 
@@ -51,6 +52,7 @@ def validate(request):
     global t, info
     passed = False
     session = request.session
+    quiz_file = request.POST['n']
     if 'counter' not in session:
         session['counter'] = 0
         t = quiz.load(quiz_file)
@@ -64,7 +66,7 @@ def validate(request):
                     'number': '',
                     'question': None,
                     'info': info,
-                    'passed': '',
+                    'passed': '', 'n': quiz_file,
                     'feedback': ''}
     counter = session['counter']
     indexes = request.POST.getall(str(counter))
@@ -88,7 +90,7 @@ def validate(request):
                 return {'project': 'Módulo 1', 'counter': '',
                         'number': '',
                         'question': None,
-                        'info': info,
+                        'info': info, 'n': quiz_file,
                         'passed': passed,
                         'feedback': feedback}
         else:
@@ -104,6 +106,6 @@ def validate(request):
             'input_type': input_type,
             'question': question,
             'info': info,
-            'passed': passed,
+            'passed': passed, 'n': quiz_file,
             'indexes': int_indexes,
             'feedback': feedback}
