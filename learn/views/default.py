@@ -1,5 +1,7 @@
+import os
 import random
 from pyramid.view import view_config
+from pyramid.httpexceptions import HTTPNotFound
 from docutils.core import publish_parts
 import quiz
 
@@ -25,6 +27,8 @@ def my_view(request):
     passed = False
     session = request.session
     quiz_file = request.GET['n']
+    if not os.path.exists('{}'.format(quiz_file)):
+        raise HTTPNotFound()
     if 'counter' in session:
         pass
     else:
@@ -53,6 +57,8 @@ def validate(request):
     passed = False
     session = request.session
     quiz_file = request.POST['n']
+    if not os.path.exists('{}'.format(quiz_file)):
+        raise HTTPNotFound()
     if 'counter' not in session:
         session['counter'] = 0
         t = quiz.load(quiz_file)
