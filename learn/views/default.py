@@ -5,8 +5,6 @@ from pyramid.httpexceptions import HTTPNotFound
 from docutils.core import publish_parts
 import quiz
 
-quiz_file = 'encuesta'
-
 
 def rst2html(text):
     'return HTML'
