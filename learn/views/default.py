@@ -24,7 +24,7 @@ def my_view(request):
     global t, info
     passed = False
     session = request.session
-    quiz_file = request.GET['n']
+    quiz_file = request.GET.get('n', '')
     if not os.path.exists('{}'.format(quiz_file)):
         raise HTTPNotFound()
     if 'counter' in session:
@@ -54,7 +54,7 @@ def validate(request):
     global t, info
     passed = False
     session = request.session
-    quiz_file = request.POST['n']
+    quiz_file = request.POST.get('n', '')
     if not os.path.exists('{}'.format(quiz_file)):
         raise HTTPNotFound()
     if 'counter' not in session:
