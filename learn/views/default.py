@@ -25,16 +25,18 @@ def my_view(request):
     passed = False
     session = request.session
     quiz_file = request.GET.get('n', '')
-    if not os.path.exists('{}'.format(quiz_file)):
+    quiz_folder = request.registry.settings['quiz_folder']
+    quiz_path = os.path.join(quiz_folder, quiz_file)
+    if not os.path.exists(quiz_path):
         raise HTTPNotFound()
     if 'counter' in session:
         test = session['test']
         info = session['info']
     else:
         session['counter'] = 0
-        test = quiz.load(quiz_file)
+        test = quiz.load(quiz_path)
         shuffle(test)
-        info = quiz.get_info(quiz_file)
+        info = quiz.get_info(quiz_path)
         session['test'] = test
         session['info'] = info
         # info['end'] = rst2html(info['end'])
@@ -60,13 +62,15 @@ def validate(request):
     passed = False
     session = request.session
     quiz_file = request.POST.get('n', '')
-    if not os.path.exists('{}'.format(quiz_file)):
+    quiz_folder = request.registry.settings['quiz_folder']
+    quiz_path = os.path.join(quiz_folder, quiz_file)
+    if not os.path.exists(quiz_path):
         raise HTTPNotFound()
     if 'counter' not in session:
         session['counter'] = 0
-        test = quiz.load(quiz_file)
+        test = quiz.load(quiz_path)
         shuffle(test)
-        info = quiz.get_info(quiz_file)
+        info = quiz.get_info(quiz_path)
         session['test'] = test
         session['info'] = info
     else:
