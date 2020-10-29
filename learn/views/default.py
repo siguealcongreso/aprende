@@ -12,8 +12,8 @@ def rst2html(text):
     return publish_parts(text, writer_name='html')['fragment']
 
 
-def shuffle(t):
-    for q in t.questions:
+def shuffle(test):
+    for q in test.questions:
         random.shuffle(q.options)
         for i, o in enumerate(q.options):
             o.index = i + 1
@@ -28,19 +28,19 @@ def my_view(request):
     if not os.path.exists('{}'.format(quiz_file)):
         raise HTTPNotFound()
     if 'counter' in session:
-        t = session['test']
+        test = session['test']
         info = session['info']
     else:
         session['counter'] = 0
-        t = quiz.load(quiz_file)
-        shuffle(t)
+        test = quiz.load(quiz_file)
+        shuffle(test)
         info = quiz.get_info(quiz_file)
-        session['test'] = t
+        session['test'] = test
         session['info'] = info
         # info['end'] = rst2html(info['end'])
 
     # display a question
-    question = t.questions[session['counter']]
+    question = test.questions[session['counter']]
     if len(question.answers) >= 2:
         input_type = 'checkbox'
     else:
@@ -64,17 +64,17 @@ def validate(request):
         raise HTTPNotFound()
     if 'counter' not in session:
         session['counter'] = 0
-        t = quiz.load(quiz_file)
-        shuffle(t)
+        test = quiz.load(quiz_file)
+        shuffle(test)
         info = quiz.get_info(quiz_file)
-        session['test'] = t
+        session['test'] = test
         session['info'] = info
     else:
-        t = session['test']
+        test = session['test']
         info = session['info']
     if request.POST.get('passed'):
         session['counter'] += 1
-        if int(session['counter']) == len(t.questions):
+        if int(session['counter']) == len(test.questions):
             # last question passed
             session['counter'] = 0
             return {'project': 'Módulo 1', 'counter': '',
@@ -88,7 +88,7 @@ def validate(request):
     int_indexes = list(map(int, indexes))
     feedback = ''
     if indexes:
-        question = t.questions[int(counter)]
+        question = test.questions[int(counter)]
         question.incomplete_feedback = 'Respuesta incompleta'
         passed = question.evaluate(indexes)
         feedbacks = question.feedbacks()
@@ -100,7 +100,7 @@ def validate(request):
             else:
                 feedback = 'Correcto.'
             # session['counter'] += 1
-            if int(session['counter']) == len(t.questions):
+            if int(session['counter']) == len(test.questions):
                 session['counter'] = 0
                 return {'project': 'Módulo 1', 'counter': '',
                         'number': '',
@@ -112,7 +112,7 @@ def validate(request):
             feeback = 'Incorrecto: ' + feedback
 
     # display a question
-    question = t.questions[session['counter']]
+    question = test.questions[session['counter']]
     if len(question.answers) >= 2:
         input_type = 'checkbox'
     else:
