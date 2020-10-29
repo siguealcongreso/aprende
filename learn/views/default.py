@@ -35,6 +35,8 @@ def my_view(request):
         shuffle(t)
         info = quiz.get_info(quiz_file)
         # info['end'] = rst2html(info['end'])
+
+    # display a question
     question = t.questions[session['counter']]
     if len(question.answers) >= 2:
         input_type = 'checkbox'
@@ -65,6 +67,7 @@ def validate(request):
     if request.POST.get('passed'):
         session['counter'] += 1
         if int(session['counter']) == len(t.questions):
+            # last question passed
             session['counter'] = 0
             return {'project': 'Módulo 1', 'counter': '',
                     'number': '',
@@ -100,6 +103,7 @@ def validate(request):
         else:
             feeback = 'Incorrecto: ' + feedback
 
+    # display a question
     question = t.questions[session['counter']]
     if len(question.answers) >= 2:
         input_type = 'checkbox'
