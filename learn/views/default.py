@@ -21,19 +21,22 @@ def shuffle(t):
 
 @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
 def my_view(request):
-    global t, info
+
     passed = False
     session = request.session
     quiz_file = request.GET.get('n', '')
     if not os.path.exists('{}'.format(quiz_file)):
         raise HTTPNotFound()
     if 'counter' in session:
-        pass
+        t = session['test']
+        info = session['info']
     else:
         session['counter'] = 0
         t = quiz.load(quiz_file)
         shuffle(t)
         info = quiz.get_info(quiz_file)
+        session['test'] = t
+        session['info'] = info
         # info['end'] = rst2html(info['end'])
 
     # display a question
@@ -53,7 +56,7 @@ def my_view(request):
 @view_config(route_name='home', request_method='POST',
              renderer='../templates/mytemplate.jinja2')
 def validate(request):
-    global t, info
+
     passed = False
     session = request.session
     quiz_file = request.POST.get('n', '')
@@ -64,6 +67,11 @@ def validate(request):
         t = quiz.load(quiz_file)
         shuffle(t)
         info = quiz.get_info(quiz_file)
+        session['test'] = t
+        session['info'] = info
+    else:
+        t = session['test']
+        info = session['info']
     if request.POST.get('passed'):
         session['counter'] += 1
         if int(session['counter']) == len(t.questions):
