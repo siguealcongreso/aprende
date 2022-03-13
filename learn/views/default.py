@@ -13,6 +13,7 @@ def rst2html(text):
 
 
 def shuffle(test):
+    'Reorder the options to each question'
     for q in test.questions:
         random.shuffle(q.options)
         for i, o in enumerate(q.options):
