@@ -19,7 +19,7 @@ def shuffle(test):
             o.index = i + 1
 
 
-@view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
+@view_config(route_name='home', renderer='../templates/single.jinja2')
 def my_view(request):
 
     passed = False
@@ -56,7 +56,7 @@ def my_view(request):
 
 
 @view_config(route_name='home', request_method='POST',
-             renderer='../templates/mytemplate.jinja2')
+             renderer='../templates/single.jinja2')
 def validate(request):
 
     passed = False
