@@ -26,7 +26,7 @@ tests_require = [
 
 setup(
     name='learn',
-    version='0.2',
+    version='0.3',
     description='learn',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
