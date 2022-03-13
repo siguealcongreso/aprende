@@ -2,17 +2,17 @@
 
 {% block content %}
 <div class="content">
-  <h1><span class="font-normal small">{{ info.title }}</span> <span class="smaller">{{ info.description }}</span></h1>
+  <h1 class="baskerville f3">{{ info.title }} <span class="f4">{{ info.description }}</span></h1>
   <form action='/quiz' method='POST'>
     <input type="hidden" name="index" value="{{ counter }}">
     <input type="hidden" name="n" value="{{ n }}">
-    <p class="lead">{{ number }}. {{ question.text }}</p>
+    <p class="black">{{ number }}. {{ question.text }}</p>
     {% for option in question.options %}
-    <p><label><input type="{{ input_type }}" value="{{ option.index }}" name="{{ counter }}" {% if option.index in indexes %}checked{% endif %} />{{ option.text }}</label>
+    <p><label><input type="{{ input_type }}" value="{{ option.index }}" name="{{ counter }}" {% if option.index in indexes %}checked{% endif %} /> {{ option.text }}</label>
     {% endfor %}
     {% if not passed and question %}<p><input type="submit" value="enviar">{% endif %}
     {% if not question %}<p class="lead">{{ info.end | safe }}{% endif %}
-  <p class="lead">{{ feedback | safe }}
+  <p class="black">{{ feedback | safe }}
   <p>{% if passed %}<input type="hidden" name="passed" value="passed">
     <input type="submit" value="siguiente">{% endif %}
   </form>
