@@ -30,10 +30,7 @@ def my_view(request):
     quiz_path = os.path.join(quiz_folder, quiz_file)
     if not os.path.exists(quiz_path):
         raise HTTPNotFound()
-    if 'counter' in session:
-        test = session['test']
-        info = session['info']
-    else:
+    if 'counter' not in session or quiz_file:
         session['counter'] = 0
         test = quiz.load(quiz_path)
         shuffle(test)
@@ -41,6 +38,9 @@ def my_view(request):
         session['test'] = test
         session['info'] = info
         # info['end'] = rst2html(info['end'])
+    else:
+        test = session['test']
+        info = session['info']
 
     # display a question
     question = test.questions[session['counter']]
