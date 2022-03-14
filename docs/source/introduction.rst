@@ -44,7 +44,9 @@ A GET request runs `my_view`. The steps are:
 #. Read from the request:
 
    - session, either a new one is created or the existing one is read.
-   - `n`, the name of the quiz file to be used.
+   - `n`, the name of the quiz file to be used.  It is obtained from
+     the query string.  If there is no query string it defaults to an
+     empty string.
 
 #. Check that the quiz file exists inside `quiz_folder`.  Respond
    `HTTPNotFound` and return if needed.
@@ -59,7 +61,7 @@ A GET request runs `my_view`. The steps are:
    - Call `quiz.load` to get information about the quiz and store it
      in `info` in the session
      
-   If `counter` exists, the quiz is ongoin. Retrieve `test` and `info`
+   If `counter` exists, the quiz is ongoing. Retrieve `test` and `info`
    from the session
 
 #. Display a question
@@ -83,7 +85,8 @@ The POST request runs `validate` with these steps:
 #. Read from the request:
 
    - session
-   - `n`, the name of the quiz file. In the POST data.
+   - `n`, the name of the quiz file. It is obtained from the POST
+     data.
 
 #. Check that the quiz file exists inside `quiz_folder`.  Respond
    `HTTPNotFound` and return if needed.
