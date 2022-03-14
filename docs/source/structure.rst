@@ -8,8 +8,7 @@ Files
 ::
 
    learn/static/
-         templates/layout.jinja2
-	           mytemplate.jinja2
+         templates/single.jinja2
 	 views/
 	 routes.py
 
@@ -17,29 +16,21 @@ Files
 Templates
 =========
 
-These templates are used:
+The `single.jinja2` template has this structure:
 
-- `layout.jinja2`.  The base template, it uses:
+- Load the Tachyons CSS
+- Load a shortcut icon
+- Provide Open Graph and Twitter Card fields
+- A `header` element similar to the ananke theme. `info.title`
+  and `info.description` are used instead of the site title and
+  description.
+- A `main` element contains and `article` element.
+- A `form` element with these elements:
 
-  - Bootstrap CSS 3.3.7 from bootstrapcdn.com. Bootsrap JavaScript is
-    loaded at the end of the document so the pages load faster.
-  - html5shiv 3.7.0 and respond.js 1.4.2 from maxcdn.com
-  - `static/theme.css` that loads Open Sans font family from
-    fonts.googleapis.com
-  - The `description`, `shortcut icon`, the logo, the Twitter and
-    Facebook URLs and the copyright notice where customized for the
-    use on the first site.
+  - The value of the `action` attribute is ``/quiz#main``.
+  - displays `question.text` and the `question.options`
+  - `input_type` selects radio or checkbox type.
+  - There are hidden input elements for `counter` and `n`.
 
-  
-- `mytemplate.jinja2`. Extends the base layout by implementing the
-  content block.  It uses:
-
-  - info.title and info.description
-  - number and question.text
-  - Iterates on `question.options` to create the option check boxes or
-    radio buttons using option.index, option.text, and input_type.
-  - If there are no questions, it displays `info.end`.
-  - It displays `feedback`.
-  - Includes the hidden inputs `index` and `n`.
-  - If passed is True, include a hidden input with this name and
-    value.
+- A `footer` element similar to the anake theme.
+- Load the Tachyons Javascript.
