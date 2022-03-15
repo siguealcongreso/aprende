@@ -36,6 +36,33 @@ information:
 Operation
 =========
 
+A single HTTP route ``/`` is configured. This route is associated to a
+view for requests using the GET method and to another view for
+requests with the POST method.  All the responses use a single
+template that includes a ``form`` element.
+
+A test is started with a GET request that includes a query string
+``?n=<file_name>`` that selects which test will be used.  The response
+displays the first question and its options.  All subsequent requests
+are started by a click in the form submit button and they use the POST
+method.
+
+The submit button of the form is labeled `submit`, to allow the user
+to send the selected option or options to answer a question.  These
+options are evaluated for correctness and the response provides
+feedback. If the answer is not correct, this step  is repeated.
+
+Once the answer is correct, the button is labeled `continue` to allow
+the user to proceed to the next question.
+
+This cycle continues until the last question is responded correctly.
+At this point the response shows the final feedback, there is no
+submit button and the test is ended.
+
+
+Detailed steps
+==============
+
 GET request
 -----------
 
