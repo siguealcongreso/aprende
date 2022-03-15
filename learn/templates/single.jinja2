@@ -47,7 +47,7 @@
     <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
 
 <div class="content">
-  <form action='/quiz#main' method='POST'>
+  <form action='{{request.path}}#main' method='POST'>
     <input type="hidden" name="index" value="{{ counter }}">
     <input type="hidden" name="n" value="{{ n }}">
     <p class="black">{{ number }}. {{ question.text }}</p>
