@@ -73,20 +73,20 @@ A GET request runs `my_view`. The steps are:
    - session, either a new one is created or the existing one is read.
    - `n`, the name of the quiz file to be used.  It is obtained from
      the query string.  If there is no query string it defaults to an
-     empty string.
+     empty string.  Save into `quiz_file`.
 
 #. Check that the quiz file exists inside `quiz_folder`.  Respond
    `HTTPNotFound` and return if needed.
 
-#. Check for `counter` in the session. If it does not exist, this is the
-   start of a quiz:
+#. If ``quiz_file`` is not empty, i.e. the quiz file name was provided
+   in the query string, consider this as the start of a quiz:
 
-   - Set `counter` to 0
+   - Set `counter` to 0.
    - Call `quiz.load` to get the quiz content as a `Quiz` instance
-     and store it in `test` in the session
-   - Call shuffle to reorder que options to each question
+     and store it in `test` in the session.
+   - Call shuffle to reorder que options to each question.
    - Call `quiz.load` to get information about the quiz and store it
-     in `info` in the session
+     in `info` in the session.
      
    If `counter` exists, the quiz is ongoing. Retrieve `test` and `info`
    from the session
