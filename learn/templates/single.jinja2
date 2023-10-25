@@ -7,7 +7,7 @@
     <meta name="description" content="Mini curso en línea">
     <link rel="shortcut icon" href="{{request.static_url('learn:static/sac.png')}}">
     <title>Sigue al Congreso - Aprende</title>
-    <link href="{{request.static_url('learn:static/dist/css/app.4fc0b62e4b82c997bb0041217cd6b979.css')}}" rel="stylesheet">
+    <link href="{{request.static_url('learn:static/css/style.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="/custom.css">
 
     <meta property="og:title" content="Sigue al Congreso" />
@@ -23,28 +23,41 @@
     <meta name="twitter:description" content="Monitoreo parlamentario ciudadano"/>
   </head>
 
-  <body class="ma0 avenir bg-near-white">
+  <body lang="en">
+
+<div class="wrapper-masthead">
+  <div class="container">
+    <header class="masthead clearfix">
+      <a href="http://siguealcongreso.org" class="site-avatar"><img src="{{request.static_url('learn:static/logo.jpg')}}" /></a>
+
+      <div class="site-info">
+        <h1 class="site-name"><a href="http://siguealcongreso.org/">Sigue al Congreso</a></h1>
+        <p class="site-description">Monitoreo parlamentario ciudadano</p>
+        <div class="social-media">
+
+
+
+
+
+        </div>
+      </div>
+
+      <nav>
+        <a href="/acerca">Acerca de</a>
+      </nav>
+    </header>
+  </div>
+</div>
 
     <header>
-      <div class="pb3-m pb6-l bg-dark-blue">
-	<nav class="pv3 ph3 ph4-ns" role="navigation">
-	  <div class="flex-l justify-between items-center center">
-	    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
-              Sigue al Congreso </a>
-	      <div class="flex-l items-center">
-	      </div>
-	  </div>
-	</nav>
-
-	<div class="tc-l pv3 ph3 ph4-ns">
-          <h1 class="f3 f-subheadline-l fw2 light-silver mt0 mb0 lh-title">{{info.title}}</h1>
-          <h2 class="fw1 f5 f3-l white-80 measure-wide-l center lh-copy mt3">{{info.description}}</h2>
+	<div class="container">
+          <h2>{{info.title}}</h1>
+          <h3>{{info.description}}</h2>
 	</div>
-      </div>
     </header>
 
-  <main id="main" class="pb7" role="main">
-    <article class="cf ph3 ph5-l pv3 pv4-l f4 tc-l center measure-wide lh-copy mid-gray">
+  <main>
+    <article class="container">
 
 <div class="content">
   <form action='{{request.path}}#main' method='POST'>
@@ -64,16 +77,13 @@
 
     </article>
   </main>
-  <footer class="bg-dark-blue bottom-0 w-100 pa3" role="contentinfo">
-    <div class="flex justify-between">
-      <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://siguealcongreso.org" >
-	&copy;  Sigue al Congreso 2022 </a>
-	<div>
-	</div>
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+        © Sigue al Congreso 2023
+        </footer>
+      </div>
     </div>
-  </footer>
-
-  <script src="{{request.static_url('learn:static/dist/js/app.3fc0f988d21662902933.js')}}"></script>
   </body>
 </html>
 
