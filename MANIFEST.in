@@ -1,2 +1,3 @@
+include src/learn/static/*
 include *.txt *.ini *.cfg *.rst
 recursive-include learn *.ico *.png *.css *.gif *.jpg *.pt *.txt *.mak *.mako *.js *.html *.xml *.jinja2
