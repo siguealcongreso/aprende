@@ -32,6 +32,9 @@ tests = [
     "pytest >= 3.7.4",
     "pytest-cov",
 ]
+doc = [
+    "sphinx"
+]
 
 [project.entry-points."paste.app_factory"]
 main = "learn:main"
