@@ -35,3 +35,11 @@ tests = [
 
 [project.entry-points."paste.app_factory"]
 main = "learn:main"
+
+[tool.setuptools]
+packages = [
+    "learn",
+    "learn.static",
+    "learn.static.css",
+    "learn.templates",
+    "learn.views"]
